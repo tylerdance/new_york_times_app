@@ -34,12 +34,6 @@ app.get('/', (req, res) => {
                 console.log(finalObject);
 
             }
-            
-            // display title
-            // byline
-            // publication_date
-            // url link
-            // headline
         }
     })
     .catch(err => {
