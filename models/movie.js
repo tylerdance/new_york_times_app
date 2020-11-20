@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       // validate: { notNull: true }
     },
-    // byline: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: false,
-    //   // validate: { notNull: true }
-    // },
+    byline: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      // validate: { notNull: true }
+    },
     headline: {
       type: DataTypes.TEXT,
       allowNull: false,
