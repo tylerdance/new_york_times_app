@@ -8,6 +8,7 @@ const ejsLayouts = require('express-ejs-layouts');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const NYT_API_KEY = process.env.NYT_API_KEY;
+console.log(NYT_API_KEY);
 
 // Database
 const db = require('./models');
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
     // res.send('Welcome to backend!');
     axios.get(`https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=${NYT_API_KEY}`)
     .then(response => {
-        
+        // console.log(response.data.results);
         if (response.status === 200) {
             let len = response.data.results.length;
             for (let i = 0; i < len; i++) {
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
                     date: movieResultObject.publication_date,
                     url: movieResultObject.link.url
                 }
+                console.log(finalObject);
                 // Adding each movie to the database inside of (movies)
                 db.movie.findOrCreate({
                     where: { title: finalObject.title },
@@ -45,7 +47,7 @@ app.get('/', (req, res) => {
                     }
                 }).then(([movie, created]) => {
                     // res.send(movie.get().title);
-                    console.log(created);
+                    // console.log(created);
                 })
 
             }
@@ -72,6 +74,7 @@ app.get('/getrocky', (req, res) => {
                     date: movieResultObject.publication_date,
                     url: movieResultObject.link.url
                 }
+                // console.log(finalObject);
                 // Adding each movie to the database inside of (movies)
                 db.movie.findOrCreate({
                     where: { title: finalObject.title },
@@ -82,8 +85,8 @@ app.get('/getrocky', (req, res) => {
                         url: finalObject.url,
                     }
                 }).then(([movie, created]) => {
-                    console.log(movie);
-                    console.log(created);
+                    // console.log(movie);
+                    // console.log(created);
                 })
 
             }
@@ -105,10 +108,10 @@ app.get('/rocky', (req, res) => {
 // GODFATHER route
 app.get('/godfather', (req, res) => {
     db.movie.findAll().then(moviesArray => {
-        console.log(moviesArray);
+        // console.log(moviesArray);
     })
 })
 
 app.listen(PORT, () => {
-    console.log(`Server is running on PORT: ${PORT}`);
+    console.log(`Server is live on port: ${PORT}`);
 });
